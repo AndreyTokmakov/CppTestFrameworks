@@ -5,4 +5,5 @@ set(CMAKE_CXX_STANDARD 23)
 
 add_subdirectory(BoostTest)
 add_subdirectory(Catch2Tests)
+add_subdirectory(GoogleBenchmark)
 add_subdirectory(GoogleTests)
