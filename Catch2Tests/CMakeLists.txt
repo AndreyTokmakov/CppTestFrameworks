@@ -7,9 +7,9 @@ project(${PROJECT_NAME} VERSION ${PROJECT_VERSION} LANGUAGES CXX)
 
 add_compile_options(-c -Wall -Wextra -O3 -std=c++2a)
 
-include_directories(../../third_party/Catch2/src)
-include_directories(../../third_party/Catch2/build/generated-includes)
-link_directories(../../third_party/Catch2/build/src)
+include_directories(${THIRD_PARTY_DIR}/Catch2/src)
+include_directories(${THIRD_PARTY_DIR}/Catch2/build/generated-includes)
+link_directories(${THIRD_PARTY_DIR}/Catch2/build/src)
 
 # include all components
 add_executable(${PROJECT_NAME}

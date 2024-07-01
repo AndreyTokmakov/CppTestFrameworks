@@ -7,9 +7,9 @@ project(${PROJECT_NAME} VERSION ${PROJECT_VERSION} LANGUAGES CXX)
 
 add_compile_options(-c -Wall -Wextra -O3 -std=c++2a)
 
-include_directories(../../third_party/benchmark/include)
-link_directories(../../third_party/benchmark/build/lib)
-link_directories(../../third_party/benchmark/build/src)
+include_directories(${THIRD_PARTY_DIR}/benchmark/include)
+link_directories(${THIRD_PARTY_DIR}/benchmark/build/lib)
+link_directories(${THIRD_PARTY_DIR}/benchmark/build/src)
 
 find_package(benchmark REQUIRED)
 

@@ -17,9 +17,16 @@ message (STATUS "BOOST VERSION: ${Boost_VERSION}")
 find_package(Boost REQUIRED COMPONENTS unit_test_framework)
 
 # include all components
-add_executable(BoostTest MACOSX_BUNDLE
-    main.cpp
-        messages.cpp warnings.cpp handle_exceptions.cpp fixtures_basic.cpp)
+add_executable(${PROJECT_NAME}
+        main.cpp
+        messages.cpp
+        warnings.cpp
+        handle_exceptions.cpp
+        fixtures_basic.cpp
+)
 
- # Link phread library
-TARGET_LINK_LIBRARIES(BoostTest pthread boost_unit_test_framework)
+
+TARGET_LINK_LIBRARIES(${PROJECT_NAME}
+        pthread
+        boost_unit_test_framework
+)
