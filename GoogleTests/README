@@ -26,3 +26,17 @@ include_directories(${GTEST_INCLUDE_DIRS})
 # Link runTests with what we want to test and the GTest and pthread library
 add_executable(runTests tests.cpp)
 target_link_libraries(runTests ${GTEST_LIBRARIES} pthread)
+
+
+
+
+============================================================================================================================================================
+						Google Test - benchmark
+============================================================================================================================================================
+
+git clone https://github.com/google/benchmark.git
+cd benchmark
+cmake -DBENCHMARK_DOWNLOAD_DEPENDENCIES=on -DCMAKE_BUILD_TYPE=Release -B./build
+
+cd build
+make all -j$(nproc)
