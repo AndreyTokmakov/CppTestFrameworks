@@ -6,7 +6,7 @@ set(PROJECT_VERSION 1.0.0.0)
 project(${PROJECT_NAME} VERSION ${PROJECT_VERSION} LANGUAGES CXX)
 
 add_subdirectory(tests)
-add_compile_options(-c -Wall -Wextra -O3 -std=c++2a)
+add_compile_options(-c -Wall -Wextra -O3 -std=c++26)
 
 list(APPEND APP_SOURCES
         ${CMAKE_CURRENT_LIST_DIR}/src/Utils.cpp

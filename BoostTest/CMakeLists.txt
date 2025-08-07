@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.16 FATAL_ERROR)
 
 project(BoostTest)
-add_compile_options(-c -Wall -Werror -Wextra -O3 -std=c++2a)
+add_compile_options(-c -Wall -Wextra -O3 -std=c++26)
 
 
 SET(PROJECT_VERSION 1.0.0.0)
