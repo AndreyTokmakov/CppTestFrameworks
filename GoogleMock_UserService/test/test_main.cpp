@@ -7,10 +7,15 @@ Copyright   : Your copyright notice
 Description : GoogleMock
 ============================================================================**/
 
-#include <cmath>
 #include <print>
+#include <memory>
+
+#include "Database.hpp"
+#include "UserService.hpp"
 
 #include <gtest/gtest.h>
+
+/*
 #include <gmock/gmock.h>
 
 #include "user_service.hpp"
@@ -28,13 +33,11 @@ class MockUserRepository : public IUserRepository {
 public:
     MOCK_METHOD(std::optional<User>, get_user_by_id, (int), (override));
 };
-
+*/
 
 TEST(SuiteOne, SimpleTest)
 {
-    std::shared_ptr<IUserRepository> repository { std::make_shared<StubRepository>() };
-    UserService service { repository };
+    std::unique_ptr<IDatabase> database { std::make_unique<Database>() };
+    database->storeUser(User {.userId=12, .name= "Super"});
 
-    const std::string name = service.get_user_name(12);
-    std::println("User: {}", name);
 }
