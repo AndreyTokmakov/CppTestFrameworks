@@ -1,5 +1,5 @@
 /**============================================================================
-Name        : main.cpp
+Name        : test_main.cpp
 Created on  : 16.04.2024
 Author      : Andrei Tokmakov
 Version     : 1.0
@@ -7,14 +7,15 @@ Copyright   : Your copyright notice
 Description : GoogleMock
 ============================================================================**/
 
-#include <iostream>
-#include <memory>
-#include <string>
-#include <string_view>
-#include <vector>
+#include <cmath>
+#include <print>
 
+#include <gtest/gtest.h>
 #include <gmock/gmock.h>
 
+#include "user_service.hpp"
+
+/*
 class Turtle
 {
     virtual ~Turtle() = default;
@@ -40,11 +41,29 @@ public:
     MOCK_METHOD(int, GetY, (), (const, override));
 };
 
+class MockUserRepository : public IUserRepository {
+public:
+    MOCK_METHOD(std::optional<User>, get_user_by_id, (int), (override));
+};
 
-int main([[maybe_unused]] int argc,
-         [[maybe_unused]] char** argv)
+
+
+*/
+
+
+struct StubRepository : public IUserRepository
 {
-    const std::vector<std::string_view> args(argv + 1, argv + argc);
+    std::optional<User> get_user_by_id(int id) override
+    {
+        return User { .id = id, .name = "John Dow" };
+    }
+};
 
-    return EXIT_SUCCESS;
+TEST(SuiteOne, SimpleTest)
+{
+    std::shared_ptr<IUserRepository> repository { std::make_shared<StubRepository>() };
+    UserService service { repository };
+
+    const std::string name = service.get_user_name(12);
+    std::println("User: {}", name);
 }

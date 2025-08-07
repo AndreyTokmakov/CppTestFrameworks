@@ -33,8 +33,8 @@
 #include <boost/version.hpp>
 #include <boost/test/unit_test.hpp>
 
-namespace Utilites {
-
+namespace Utilites
+{
     void PrintBoostVersion()
     {
         std::cout << "Using Boost " << BOOST_VERSION / 100000     << "."  // major version
