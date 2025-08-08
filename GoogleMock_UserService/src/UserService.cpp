@@ -8,3 +8,19 @@ Description : UserService.cpp
 ============================================================================**/
 
 #include "UserService.hpp"
+#include <print>
+
+UserService::UserService(std::unique_ptr<IDatabase>&& dbImpl) : database { std::move(dbImpl) }{
+}
+
+bool UserService::createUser(const uint32_t id, const std::string& name)
+{
+    std::println("[UserService] Create User(id: {}, name: {})", id, name);
+    return database->storeUser(User {.userId=id, .name= name});
+}
+
+std::optional<User> UserService::findUser(const uint32_t id)
+{
+    return database->loadUser(id);
+}
+

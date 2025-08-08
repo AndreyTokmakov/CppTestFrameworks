@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.21 FATAL_ERROR)
 
 enable_testing()
-project(UnitTestsy)
+project(UnitTests)
 add_compile_options(-c -Wall -Werror -Wextra -O3 -std=c++2a)
 
 find_package(GTest REQUIRED)

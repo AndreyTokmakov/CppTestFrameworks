@@ -8,7 +8,6 @@ Description : Database.cpp
 ============================================================================**/
 
 #include "Database.hpp"
-
 #include <print>
 
 bool Database::storeUser(const User& user)

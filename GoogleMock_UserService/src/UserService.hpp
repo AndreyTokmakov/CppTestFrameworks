@@ -10,9 +10,20 @@ Description : UserService.hpp
 #ifndef CPPTESTFRAMEWORKS_USERSERVICE_HPP
 #define CPPTESTFRAMEWORKS_USERSERVICE_HPP
 
-class UserService
-{
+#include <memory>
+#include "IDatabase.hpp"
+#include "IService.hpp"
 
+struct UserService final : IService
+{
+    explicit UserService(std::unique_ptr<IDatabase>&& dbImpl);
+
+    bool createUser(uint32_t id, const std::string& name) override;
+    std::optional<User> findUser(uint32_t id) override;
+
+private:
+
+    std::unique_ptr<IDatabase> database { nullptr };
 };
 
 #endif //CPPTESTFRAMEWORKS_USERSERVICE_HPP

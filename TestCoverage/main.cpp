@@ -25,6 +25,8 @@ int max(const int a, const int b)
 // make all
 // ctest -T Test -T Coverage
 
+// https://smhk.net/note/2024/11/cmake-and-coverage-with-gcov/
+
 int main([[maybe_unused]] int argc,
          [[maybe_unused]] char** argv)
 {

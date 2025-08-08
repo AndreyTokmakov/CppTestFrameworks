@@ -38,6 +38,8 @@ public:
 TEST(SuiteOne, SimpleTest)
 {
     std::unique_ptr<IDatabase> database { std::make_unique<Database>() };
-    database->storeUser(User {.userId=12, .name= "Super"});
+    UserService userService(std::move(database));
+
+    userService.createUser(1, "User_1");
 
 }
