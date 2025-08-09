@@ -17,6 +17,8 @@ struct User
 {
     uint32_t userId { 0 };
     std::string name;
+
+    friend auto operator<=>(const User&, const User&) = default;
 };
 
 #endif //CPPTESTFRAMEWORKS_USER_HPP

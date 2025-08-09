@@ -14,32 +14,46 @@ Description : GoogleMock
 #include "UserService.hpp"
 
 #include <gtest/gtest.h>
-
-/*
 #include <gmock/gmock.h>
 
-#include "user_service.hpp"
+using ::testing::Return;
+using ::testing::Eq;
 
 
-struct StubRepository : public IUserRepository
+struct MockDatabase : public IDatabase
 {
-    std::optional<User> get_user_by_id(int id) override
-    {
-        return User { .id = id, .name = "John Dow" };
-    }
+    MOCK_METHOD(bool, storeUser, (const User&), (override));
+    MOCK_METHOD(std::optional<User>, loadUser, (uint32_t), (override));
 };
 
-class MockUserRepository : public IUserRepository {
-public:
-    MOCK_METHOD(std::optional<User>, get_user_by_id, (int), (override));
-};
-*/
 
-TEST(SuiteOne, SimpleTest)
+TEST(UserServiceTests, VerifyDBMethodCall_StoreUser)
 {
-    std::unique_ptr<IDatabase> database { std::make_unique<Database>() };
-    UserService userService(std::move(database));
+    std::shared_ptr<MockDatabase> database { std::make_shared<MockDatabase>() };
+    UserService userService ( database );
 
-    userService.createUser(1, "User_1");
+    const User user { .userId=1, .name="Alice" };
 
+    EXPECT_CALL(*database, storeUser(user)).WillOnce(Return(true));
+    userService.createUser(1, "Alice");
 }
+
+
+TEST(UserServiceTests, VerifyDBMethodCall_LoadUser)
+{
+    std::shared_ptr<MockDatabase> database { std::make_shared<MockDatabase>() };
+    UserService userService ( database );
+
+    const uint32_t userId = 1;
+
+    EXPECT_CALL(*database, loadUser(userId))
+        .WillOnce(Return(std::make_optional<User>(userId, "Alice")));
+
+    const std::optional<User> opUser = userService.findUser(userId);
+
+    const User userExpected { .userId=userId, .name="Alice" };
+    EXPECT_EQ(opUser.value(), userExpected);
+}
+
+
+

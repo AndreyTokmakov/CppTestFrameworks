@@ -16,14 +16,14 @@ Description : UserService.hpp
 
 struct UserService final : IService
 {
-    explicit UserService(std::unique_ptr<IDatabase>&& dbImpl);
+    explicit UserService(const std::shared_ptr<IDatabase>& dbImpl);
 
     bool createUser(uint32_t id, const std::string& name) override;
     std::optional<User> findUser(uint32_t id) override;
 
 private:
 
-    std::unique_ptr<IDatabase> database { nullptr };
+    std::shared_ptr<IDatabase> database { nullptr };
 };
 
 #endif //CPPTESTFRAMEWORKS_USERSERVICE_HPP
