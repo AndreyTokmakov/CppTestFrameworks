@@ -8,16 +8,23 @@ Description : UserService.cpp
 ============================================================================**/
 
 #include "UserService.hpp"
+
+#include <iostream>
 #include <print>
 
-UserService::UserService(const std::shared_ptr<IDatabase>& dbImpl) : database { dbImpl }{
+UserService::UserService(IDatabase* dbImpl) : database { dbImpl }{
 }
 
 bool UserService::createUser(const uint32_t id, const std::string& name)
 {
     const User user { .userId=id, .name= name };
     std::println("[UserService] Create User(id: {}, name: {})", id, name);
-    return database->storeUser(user);
+    const bool result =  database->storeUser(user);
+    if (!result) {
+        std::println(std::cerr, "storeUser() returned False");
+    }
+
+    return result;
 }
 
 std::optional<User> UserService::findUser(const uint32_t id)
