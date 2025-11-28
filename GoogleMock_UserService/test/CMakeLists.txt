@@ -20,6 +20,7 @@ enable_testing()
 # include all components
 add_executable(${PROJECT_NAME}
         test_main.cpp
+        fixtures.cpp
 )
 
 target_include_directories(${PROJECT_NAME} PUBLIC ${SERVICE_SRC_DIR})
